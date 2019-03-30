@@ -120,13 +120,6 @@ namespace Browser_Eadge
             this.refreshButton.Text = "Refresh";
             this.refreshButton.Click += new System.EventHandler(this.refreshButton_Click);
             // 
-            // btnInject
-            // 
-            this.btnInject.Name = "btnInject";
-            this.btnInject.Size = new System.Drawing.Size(98, 22);
-            this.btnInject.Text = "Inject Java Script";
-            this.btnInject.Click += new System.EventHandler(this.btnInject_Click);
-            // 
             // btnCallJavaScript
             // 
             this.btnCallJavaScript.Name = "btnCallJavaScript";

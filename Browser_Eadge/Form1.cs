@@ -240,21 +240,8 @@ namespace Browser_Eadge
             }
         }
 
-        private void btnInject_Click(object sender, EventArgs e)
-        {
-
-
-            
-            string script = @"magicNumber()";
-            string[] args = { script };
-            int foo = int.Parse(webBrowser1.InvokeScript("eval", args));
-            MessageBox.Show(foo.ToString());
-        }
-
         private async void  toolStripButton1_Click(object sender, EventArgs e)
         {
-            //string functionString = "function callCSharp(){ window.external.notify(8);}";
-            //await webBrowser1.InvokeScriptAsync("eval", new string[] { functionString });
             await webBrowser1.InvokeScriptAsync("eval", new string[] { "window.external.notify(\"Hello World\")" });
         }
     }
