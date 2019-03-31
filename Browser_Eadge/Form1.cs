@@ -225,12 +225,8 @@ namespace Browser_Eadge
 
         private async void btnCallJavaScript_Click(object sender, EventArgs e)
         {
-
-
-            
-            if (webBrowser1.Source.Host.Contains("ynet"))
-            {
-                try
+            eventsForm.notifyEvent("called from csharp, navigate to: cnn");
+            try
                 {
                     string functionString = "function navigateToCnnWhenGoingToYnet(){ window.location.href = 'https://edition.cnn.com/';}";
                     await webBrowser1.InvokeScriptAsync("eval", new string[] { functionString });
@@ -241,7 +237,7 @@ namespace Browser_Eadge
 
                 }
 
-            }
+            
         }
 
         private async void  toolStripButton1_Click(object sender, EventArgs e)
