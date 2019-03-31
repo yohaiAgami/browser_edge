@@ -14,6 +14,9 @@ namespace Browser_Eadge
 {
     public partial class Form1 : Form
     {
+
+
+        EventsForm eventsForm;
         public Form1()
         {
             InitializeComponent();
@@ -49,29 +52,25 @@ namespace Browser_Eadge
             webBrowser1.UnviewableContentIdentified += WebBrowser1_UnviewableContentIdentified;
 
             webBrowser1.ContextMenuChanged += WebBrowser1_ContextMenuChanged;
-
-            webBrowser1.NewWindowRequested += WebBrowser1_NewWindowRequested;
-
+            
 
             webBrowser1.ScriptNotify += WebBrowser1_ScriptNotify;
 
 
-            
-            
 
+
+            eventsForm = new EventsForm();
+
+            eventsForm.Show();
             
 
         }
 
         private void WebBrowser1_NavigationCompleted(object sender, Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT.WebViewControlNavigationCompletedEventArgs e)
         {
-            //throw new NotImplementedException();
+            eventsForm.notifyEvent("end navigation to: " + e.Uri.AbsoluteUri.ToString());
         }
 
-        private void WebBrowser1_NewWindowRequested(object sender, Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT.WebViewControlNewWindowRequestedEventArgs e)
-        {
-            //throw new NotImplementedException();
-        }
 
         private void WebBrowser1_UnviewableContentIdentified(object sender, Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT.WebViewControlUnviewableContentIdentifiedEventArgs e)
         {
@@ -103,10 +102,11 @@ namespace Browser_Eadge
 
             var fileurl =
             e.Uri.AbsoluteUri;
-            
+
+            eventsForm.notifyEvent("new file download request : " + e.Uri.AbsoluteUri);
 
             // Allow the user to select multiple images.
-            
+
             this.saveFileDialog1.Title = "Save File Location";
 
             this.saveFileDialog1.ShowDialog();
@@ -118,7 +118,8 @@ namespace Browser_Eadge
         //When starting to navigate
         private void WebBrowser1_NavigationStarting(object sender, Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT.WebViewControlNavigationStartingEventArgs e)
         {
-            //MessageBox.Show("start navigation");
+            eventsForm.notifyEvent("start navigation to: " + e.Uri.AbsoluteUri);
+            
         }
 
 
@@ -126,6 +127,9 @@ namespace Browser_Eadge
 
         private void WebBrowser1_ScriptNotify(object sender, Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT.WebViewControlScriptNotifyEventArgs e)
         {
+
+
+            eventsForm.notifyEvent("called from javascript, value to show in message box : " + e.Value);
             MessageBox.Show(e.Value);
         }
 
@@ -145,7 +149,7 @@ namespace Browser_Eadge
 
         private async void WebBrowser1_DOMContentLoaded(object sender, Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT.WebViewControlDOMContentLoadedEventArgs e)
         {
-
+            eventsForm.notifyEvent("finish content loading of: " + e.Uri.AbsoluteUri.ToString());
         }
 
 
